@@ -1,13 +1,14 @@
 # ImmortalWrt CI for JDCloud Athena / JDC AX6600
 
-京东云雅典娜 / JDC AX6600 (`jdcloud_re-cs-02`) 的 ImmortalWrt 云编译项目。  
-An ImmortalWrt cloud build project for JDCloud Athena / JDC AX6600 (`jdcloud_re-cs-02`).
+京东云雅典娜 / JDC AX6600 (`jdcloud_re-cs-02`) 的 ImmortalWrt GitHub Actions 编译项目。
+
+An ImmortalWrt GitHub Actions build project for JDCloud Athena / JDC AX6600 (`jdcloud_re-cs-02`).
 
 ## 中文说明
 
 ### 项目定位
 
-本仓库用于在 GitHub Actions 上自动编译京东云雅典娜 / JDC AX6600 固件。插件配置以 `yjy116/Immortalwrt-CI-GL-AXT1800` 为主，已移除 AXT1800 专用风扇控件，并结合 `VIKINGYFY/OpenWRT-CI` 与 `ones20250/Openwrt-AX6600` 中针对 AX6600 的 eMMC、LED、NSS、无线和分区工具设置。
+本仓库用于通过 GitHub Actions 编译京东云雅典娜 / JDC AX6600 固件。插件配置以 `yjy116/Immortalwrt-CI-GL-AXT1800` 为主，已移除 AXT1800 专用风扇控件，并结合 `VIKINGYFY/OpenWRT-CI` 与 `ones20250/Openwrt-AX6600` 中针对 AX6600 的 eMMC、LED、NSS、无线和分区工具设置。
 
 ### 设备配置
 
@@ -21,23 +22,23 @@ An ImmortalWrt cloud build project for JDCloud Athena / JDC AX6600 (`jdcloud_re-
 
 ### 已启用的重点内容
 
-- 继承 AXT1800 仓库的主要插件配置，去除 `luci-app-fancontrol` 与相关风扇控件。
+- 保留 AXT1800 仓库的主要插件配置，去除 `luci-app-fancontrol` 与相关风扇控件。
 - 添加 `luci-app-qbittorrent`，并从 `sbwml/luci-app-qbittorrent` 拉取插件源码。
 - 添加雅典娜 LED 屏控制插件 `luci-app-athena-led`，并补齐构建所需的 `find_button` 辅助脚本。
-- 添加 eMMC / 分区扩容 / 自动挂载相关组件：`block-mount`、`kmod-mmc`、`kmod-sdhci-msm`、`resize2fs`、`tune2fs` 等。
+- 添加 eMMC、分区扩容、自动挂载相关组件，包括 `block-mount`、`kmod-mmc`、`kmod-sdhci-msm`、`resize2fs`、`tune2fs` 等。
 - 补齐 `ones20250/Openwrt-AX6600` 中启用而本仓库缺少的插件和包，包括 Sentinel、ARP bind、firewall4、NSS 驱动组、`athena-led-control`、`iptasn`、`iperf3`、OpenSSL 与 USB QMI 相关模块。
 - 保留高通平台相关处理：NSS feed 控制、NSS 固件版本设置、NSS init 启动顺序调整、`ARM64_BRBE` 关闭。
 - 保留 HomeProxy、OpenClash、daed、Tailscale、EasyTier、ZeroTier、Samba、AdGuardHome、SQM、TTYD 等常用插件。
 
-### 手动编译
+### GitHub Actions 手动编译
 
 1. 进入 GitHub Actions。
 2. 选择 `JDC-AX6600` workflow。
 3. 点击 `Run workflow`。
-4. 如需临时增删配置，在 `PACKAGE` 输入框填入额外 `.config` 行，多行使用 `\n` 分隔。
+4. 如需临时增删配置，在 `PACKAGE` 输入框填入额外 `.config` 行，多行使用换行分隔。
 5. 如只想生成配置文件，将 `TEST` 设为 `true`。
 
-编译完成后，固件和最终 `.config` 会发布到 Releases。
+编译完成后，固件和最终 `.config` 会发布到 GitHub Releases。
 
 ### 自动编译
 
@@ -72,7 +73,7 @@ An ImmortalWrt cloud build project for JDCloud Athena / JDC AX6600 (`jdcloud_re-
 
 ### Purpose
 
-This repository builds ImmortalWrt firmware for JDCloud Athena / JDC AX6600 through GitHub Actions. The package baseline follows `yjy116/Immortalwrt-CI-GL-AXT1800`, with the AXT1800 fan-control pieces removed. Device-specific settings for eMMC, LED, NSS, wireless tuning, and partition tools are merged from `VIKINGYFY/OpenWRT-CI` and `ones20250/Openwrt-AX6600`.
+This repository builds ImmortalWrt firmware for JDCloud Athena / JDC AX6600 through GitHub Actions. The package baseline follows `yjy116/Immortalwrt-CI-GL-AXT1800`, with AXT1800 fan-control pieces removed. Device-specific settings for eMMC, LED, NSS, wireless tuning, and partition tools are merged from `VIKINGYFY/OpenWRT-CI` and `ones20250/Openwrt-AX6600`.
 
 ### Device
 
@@ -90,7 +91,7 @@ This repository builds ImmortalWrt firmware for JDCloud Athena / JDC AX6600 thro
 - Adds qBittorrent through `luci-app-qbittorrent` from `sbwml/luci-app-qbittorrent`.
 - Adds Athena LED screen support through `luci-app-athena-led` and a build-time `find_button` helper.
 - Adds eMMC, partition expansion, and automount packages such as `block-mount`, `kmod-mmc`, `kmod-sdhci-msm`, `resize2fs`, and `tune2fs`.
-- Adds plugin/package selections enabled by `ones20250/Openwrt-AX6600` but missing here, including Sentinel, ARP bind, firewall4, NSS driver packages, `athena-led-control`, `iptasn`, `iperf3`, OpenSSL, and USB QMI modules.
+- Adds plugin and package selections enabled by `ones20250/Openwrt-AX6600` but missing here, including Sentinel, ARP bind, firewall4, NSS driver packages, `athena-led-control`, `iptasn`, `iperf3`, OpenSSL, and USB QMI modules.
 - Keeps Qualcomm platform handling for NSS feed control, NSS firmware version, NSS init order, and `ARM64_BRBE` disablement.
 
 ### Build

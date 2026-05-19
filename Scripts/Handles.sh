@@ -22,6 +22,11 @@ if [ -d *"homeproxy"* ]; then
 	cd "$PKG_PATH"
 fi
 
+homeproxy_makefile="../feeds/luci/applications/luci-app-homeproxy/Makefile"
+if [ -f "$homeproxy_makefile" ]; then
+	sed -i 's#+sing-box[[:space:]]*\\#+sing-box-tiny \\#g' "$homeproxy_makefile"
+fi
+
 if [ -d *"luci-theme-argon"* ]; then
 	cd ./luci-theme-argon/
 	sed -i "s/primary '.*'/primary '#31a1a1'/; s/'0.2'/'0.5'/; s/'none'/'bing'/; s/'600'/'normal'/" ./luci-app-argon-config/root/etc/config/argon
@@ -50,6 +55,11 @@ if [ -d "./luci-app-athena-led" ]; then
 	if [ ! -f ./luci-app-athena-led/root/usr/bin/find_button.sh ]; then
 		cp "$GITHUB_WORKSPACE/Scripts/find_button.sh" ./luci-app-athena-led/root/usr/bin/find_button.sh
 	fi
+fi
+
+if [ -d "./OpenWrt-nikki/mihomo-alpha" ] && [ -d "./OpenWrt-nikki/mihomo-meta" ]; then
+	echo "Removing OpenWrt-nikki/mihomo-alpha to avoid Kconfig recursion with mihomo-meta."
+	rm -rf ./OpenWrt-nikki/mihomo-alpha
 fi
 
 if [ -f "./luci-app-iperf3/Makefile" ]; then
