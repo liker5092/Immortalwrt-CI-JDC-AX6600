@@ -69,6 +69,9 @@ update_version() {
 	done
 }
 
+# add dockerman
+update_package "dockerman" "lisaac/luci-app-dockerman" "master"
+
 update_package "argon" "sbwml/luci-theme-argon" "openwrt-25.12"
 update_package "aurora" "eamonxg/luci-theme-aurora" "master"
 update_package "aurora-config" "eamonxg/luci-app-aurora-config" "master"
@@ -84,7 +87,7 @@ update_package "passwall2" "Openwrt-Passwall/openwrt-passwall2" "main" "pkg"
 update_package "luci-app-tailscale" "asvow/luci-app-tailscale" "main"
 
 update_package "ddns-go" "sirpdboy/luci-app-ddns-go" "main"
-update_package "diskman" "sbwml/luci-app-diskman" "main"
+update_package "diskman" "liker5092/luci-app-diskman" "main"
 update_package "luci-app-mini-diskmanager" "4IceG/luci-app-mini-diskmanager" "main" "pkg"
 update_package "easytier" "EasyTier/luci-app-easytier" "main"
 update_package "luci-app-iperf3" "Gevatter-Tod/luci-app-iperf3" "main"
