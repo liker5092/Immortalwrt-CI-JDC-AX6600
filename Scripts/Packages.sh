@@ -70,6 +70,7 @@ update_version() {
 }
 
 # add dockerman
+update_package "luci-lib-docker" "lisaac/luci-lib-docker" "master"
 update_package "dockerman" "lisaac/luci-app-dockerman" "master"
 
 update_package "argon" "sbwml/luci-theme-argon" "openwrt-25.12"
