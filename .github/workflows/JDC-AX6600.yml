@@ -32,8 +32,8 @@ jobs:
       WRT_THEME: aurora
       WRT_NAME: JDC-AX6600
       WRT_SSID: Athena
-      WRT_WORD: "77915558"
-      WRT_IP: 192.168.101.1
+      WRT_WORD: "12345678"
+      WRT_IP: 192.168.168.1
       WRT_PW: none
       WRT_REPO: https://github.com/${{ matrix.SOURCE }}.git
       WRT_BRANCH: ${{ matrix.BRANCH }}
